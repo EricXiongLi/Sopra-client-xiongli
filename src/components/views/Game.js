@@ -7,13 +7,23 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import "styles/views/Game.scss";
 
-const Player = ({ user }) => (
-  <div className="player container">
-    <div className="player username">{user.username}</div>
-    <div className="player name">{user.name}</div>
-    <div className="player id">id: {user.id}</div>
-  </div>
-);
+const Player = ({ user }) => {
+  const history = useHistory();
+  const userId = user.id;
+
+  return (
+    <div
+      className="player container hover:cursor-pointer"
+      onClick={() => {
+        history.push(`user/${userId}`);
+      }}
+    >
+      <div className="player username">{user.username}</div>
+      <div className="player name">{user.name}</div>
+      <div className="player id">id: {user.id}</div>
+    </div>
+  );
+};
 
 Player.propTypes = {
   user: PropTypes.object,
@@ -30,8 +40,19 @@ const Game = () => {
   // more information can be found under https://reactjs.org/docs/hooks-state.html
   const [users, setUsers] = useState(null);
 
+  const sendLogoutRequest = async () => {
+    // const requestBody = JSON.stringify({ username, password });
+    // const response = await api.post("/user/login", requestBody);
+    try {
+      await api.post("/user/logout");
+    } catch (error) {
+      alert(`Something went wrong during the logout: \n${handleError(error)}`);
+    }
+  };
   const logout = () => {
     localStorage.removeItem("token");
+    sendLogoutRequest();
+
     history.push("/login");
   };
 
