@@ -1,0 +1,13 @@
+{
+    "background.useDefaultAsoul": false,
+    "background.customImages": [
+        "/Users/lixiong/Documents/images/spiderman2 (1).jpg",
+        "/Users/lixiong/Documents/images/spiderman3.jpg",
+        "/Users/lixiong/Documents/images/into-the-spider-verse-gwen-stacy-wallpapers.jpg"
+    ],
+    "background.loop": true,
+    "background.sidebarImages": [
+        "/Users/lixiong/Documents/images/spiderGwen4.jpg",
+        "/Users/lixiong/Documents/images/spiderGwen3.jpg"
+    ]
+}
