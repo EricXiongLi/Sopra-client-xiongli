@@ -1,4 +1,4 @@
-# SoPra FS22 - Client Template
+# SoPra Client
 
 ## Getting started
 
