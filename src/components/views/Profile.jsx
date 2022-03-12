@@ -14,14 +14,7 @@ const Profile = () => {
     // const response = await api.post("/user/login", requestBody);
     const requestUrl = "/users/" + userId;
     try {
-      // const response = await api.get(requestUrl);
-      const response = await fetch(getDomain() + requestUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const response = await api.post(requestUrl);
       userData = response.data;
       console.log(userData.username);
       setUsername(userData.username);
