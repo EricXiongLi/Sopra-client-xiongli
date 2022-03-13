@@ -13,14 +13,20 @@ const Player = ({ user }) => {
 
   return (
     <div
-      className="player container hover:cursor-pointer"
+      className="player container flex justify-between hover:cursor-pointer"
       onClick={() => {
         history.push(`user/${userId}`);
       }}
     >
       <div className="player username">{user.username}</div>
       <div className="player name">{user.name}</div>
-      <div className="player id">id: {user.id}</div>
+      {user.logged_in ? (
+        <div className="text-white text-xs">Online</div>
+      ) : (
+        <div className="text-white text-xs">Offline</div>
+      )}
+
+      {/* <div className="player id">id: {user.id}</div> */}
     </div>
   );
 };
@@ -41,17 +47,20 @@ const Game = () => {
   const [users, setUsers] = useState(null);
 
   const sendLogoutRequest = async () => {
-    // const requestBody = JSON.stringify({ username, password });
+    const requestBody = JSON.stringify({
+      token: localStorage.getItem("token"),
+    });
     // const response = await api.post("/user/login", requestBody);
     try {
-      await api.post("/user/logout");
+      await api.post("/user/logout", requestBody);
     } catch (error) {
       alert(`Something went wrong during the logout: \n${handleError(error)}`);
     }
   };
   const logout = () => {
-    localStorage.removeItem("token");
     sendLogoutRequest();
+
+    localStorage.removeItem("token");
 
     history.push("/login");
   };
@@ -65,24 +74,7 @@ const Game = () => {
     async function fetchData() {
       try {
         const response = await api.get("/users");
-
-        // delays continuous execution of an async operation for 1 second.
-        // This is just a fake async call, so that the spinner can be displayed
-        // feel free to remove it :)
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // Get the returned users and update the state.
         setUsers(response.data);
-
-        // This is just some data for you to see what is available.
-        // Feel free to remove it.
-        console.log("request to:", response.request.responseURL);
-        console.log("status code:", response.status);
-        console.log("status text:", response.statusText);
-        console.log("requested data:", response.data);
-
-        // See here to get more data.
-        console.log(response);
       } catch (error) {
         console.error(
           `Something went wrong while fetching the users: \n${handleError(
@@ -95,9 +87,8 @@ const Game = () => {
         );
       }
     }
-
     fetchData();
-  }, []);
+  });
 
   let content = <Spinner />;
 

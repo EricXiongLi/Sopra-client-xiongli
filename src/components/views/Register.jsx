@@ -84,6 +84,17 @@ const Register = (props) => {
               Register
             </Button>
           </div>
+          <div className="text-white flex justify-between">
+            <div>Already registered?</div>
+            <div
+              className=" hover:cursor-pointer"
+              onClick={() => {
+                history.push("/login");
+              }}
+            >
+              Login now!
+            </div>
+          </div>
         </div>
       </div>
     </BaseContainer>

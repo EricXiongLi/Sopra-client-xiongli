@@ -43,12 +43,12 @@ const Login = (props) => {
     try {
       const requestBody = JSON.stringify({ username, password });
       const response = await api.post("/user/login", requestBody);
+      console.log("response", response);
 
       // Get the returned user and update a new object.
-      const user = new User(response.data);
 
       // Store the token into the local storage.
-      localStorage.setItem("token", user.token);
+      localStorage.setItem("token", response.data);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
       history.push(`/game`);
@@ -81,6 +81,17 @@ const Login = (props) => {
             >
               Login
             </Button>
+          </div>
+          <div className="text-red-white flex justify-between">
+            <div>Not registered yet?</div>
+            <div
+              className=" hover:cursor-pointer"
+              onClick={() => {
+                history.push("/register");
+              }}
+            >
+              Register now!
+            </div>
           </div>
         </div>
       </div>
