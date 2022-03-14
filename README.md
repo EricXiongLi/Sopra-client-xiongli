@@ -1,5 +1,7 @@
 # SoPra Client
 
+This is the frontend code for Sopra, I implemented it with tailwind css, as there something problem with MacOS M1 chip, I switched to Sass v4.14.0.
+
 ## Getting started
 
 Read and go through these Tutorials. It will make your life easier!
