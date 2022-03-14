@@ -11,13 +11,12 @@ const Profile = () => {
   const [creationDate, setCreationDate] = useState("");
   let userData = "";
   const sendRequest = async () => {
-    const requestBody = JSON.stringify({
-      token: localStorage.getItem("token"),
-    });
-    // const response = await api.post("/user/login", requestBody);
+    // const requestBody = JSON.stringify({
+    //   token: localStorage.getItem("token"),
+    // });
     const requestUrl = "/users/" + userId;
     try {
-      const response = await api.get(requestUrl, requestBody);
+      const response = await api.get(requestUrl);
       userData = response.data;
       setUser(userData);
       setNewUsername(userData.username);
